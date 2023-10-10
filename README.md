@@ -4,7 +4,7 @@ Agenda para controlar os agendamentos de um salão de beleza
 
 ## Checklist
 
-- [ ] Criar o repositório no GitHub com a estrutura do Gitflow, ou seja, branches main e develop.
+- [X] Criar o repositório no GitHub com a estrutura do Gitflow, ou seja, branches main e develop.
 - [ ] Usar componentes de algum framework CSS (Bootstrap, Materialize ou outro).
 - [ ] Apresentar as telas com layout responsivo usando ou não algum framework CSS.
 - [ ] Construir páginas web com o conceito de componentes. 
@@ -23,4 +23,7 @@ Agenda para controlar os agendamentos de um salão de beleza
 - [ ] Formatar a apresentação de dados com Pipes.
 - [ ] Build e deploy da aplicação.
 
-## Manual de execução
+## Links Adicionais
+
+- [Git-Repository](https://github.com/Gabhriel-bit/agenda-salao-beleza)
+- [Figma](https://www.figma.com/file/wb8hJeDVAd1zFIZaYhdOsM/agenda-salao-beleza?type=design&node-id=0%3A1&mode=design&t=ChduwdOxw09EIoBl-1)
