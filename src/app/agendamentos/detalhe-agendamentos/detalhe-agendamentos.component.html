@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h4>Detalhes do Agendamento</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="col-md-3">
+            <button class="btn btn-warning"
+                    [disabled]="isInvalidAgendamento()">Editar</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-danger"
+                    [disabled]="isInvalidAgendamento()">Deletar</button>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"><b>Código do Agendamento</b></p>
+        </div>
+    
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"><b>Data do Agendamento</b></p>
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"><b>Horário do Agendamento</b></p>
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"><b>Possui Preferência Atendimento</b></p>
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"><b>Nome do Funcionário</b></p>
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"><b>Nome do Cliente</b></p>
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"><b>Serviços</b></p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getCodigo() }}</p>  
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getFormatedDate('DD/MM/YYYY') }}</p>  
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getFormatedDate('HH:mm') }}</p>  
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getStrHasPreferenciaAtt() }}</p>  
+        </div>
+        
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getNomeFuncionario() }}</p>  
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getNomeCliente() }}</p>  
+        </div>
+
+        <div class="list-group-item clearfix">
+            <p class="list-group-item-text"
+               *ngIf="isInvalidAgendamento()">-</p>
+
+            <p class="list-group-item-text"
+               *ngIf="agendamento.getServicos().length === 1">
+               {{ agendamento.getServicos()[0] }}
+            </p>  
+
+            <div *ngIf="agendamento.getServicos().length > 1">
+                <div class="list-group-item clearfix"
+                    *ngFor="let servico of agendamento.getServicos()">
+                    <p class="list-group-item-text">{{ servico }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

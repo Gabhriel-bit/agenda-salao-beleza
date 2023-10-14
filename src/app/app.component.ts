@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Agendamento } from './agendamentos/agendamento.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Agenda Salão de Beleza';
+
+  txtCapHeader = 'Agenda para Salão de Beleza';
 }
