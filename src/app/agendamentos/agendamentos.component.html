@@ -1,10 +1,19 @@
 <div class="row">
     <div class="col-md-5">
-        <app-lista-agendamentos
-          [listaAgendamentos]="agendamentos"
-          (selectedItemAgenda)="onSelectedItemAgenda($event)"></app-lista-agendamentos>
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="btn btn-success"
+                        (click)="OnSelectItem()"
+                        routerLink="/insert-agendamento">Novo Agendamento</button>
+            </div>
+        </div>
+        <hr>
+        <app-lista-agendamentos [listaAgendamentos]="agendamentos"
+                                (selectedItemAgenda)="OnSelectedItemAgenda($event)">
+        </app-lista-agendamentos>
     </div>
     <div class="col-md-7">
-        <app-detalhe-agendamentos [selectedItemAgenda]="selectedItemAgenda"></app-detalhe-agendamentos>
+        <app-detalhe-agendamentos [selectedItemAgenda]="selectedItemAgenda"
+                                  (deleteItemAgenda)="OnDeleteItemAgenda($event)"></app-detalhe-agendamentos>
     </div>
 </div>

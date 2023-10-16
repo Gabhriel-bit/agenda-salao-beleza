@@ -53,4 +53,27 @@ export class Agendamento {
     getStrHasPreferenciaAtt(){
         return this.HasPreferenciaAtt ? 'Sim' : 'Não';
     }
+
+    updateValues(dataHora: Date,
+                 nomeCliente: string,
+                 nomeFuncionario: string,
+                 hasPreferenciaAtt: Boolean,
+                 servicos: string[]){
+        this.DataHora = dataHora;
+        this.NomeCliente = nomeCliente;
+        this.Servicos = servicos;
+        this.NomeFuncionario = nomeFuncionario;
+        this.HasPreferenciaAtt = hasPreferenciaAtt;
+    }
+
+    clone(){
+        return new Agendamento(
+            this.Codigo,
+            new Date(this.DataHora.getTime()),
+            this.NomeCliente,
+            this.NomeFuncionario,
+            this.HasPreferenciaAtt,
+            this.Servicos.slice(),
+        )
+    }
 }

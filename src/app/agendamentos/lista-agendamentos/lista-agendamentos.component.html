@@ -1,20 +1,7 @@
-<div class="row">
-    <div class="col-xs-12">
-        <button class="btn btn-success">Novo Agendamento</button>
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-xs-12">
-        <a href="#"
-           class="list-group-item clearfix"
-           *ngFor="let agendamento of agendamentos"
-           (click)="onClickItemLista(agendamento)">
-            <div class="pull-left">
-                <h4 class="list-group-item-heading">{{ agendamento.getFormatedDate() }}</h4>
-                <p class="list-group-item-text">Cliente: {{ agendamento.getNomeCliente() }}</p>
-            </div>
-        </a>
-        <app-item-lista-agendamentos></app-item-lista-agendamentos>
-    </div>
+<div class="scrollbar">
+    <app-item-lista-agendamentos
+        *ngFor="let agendamento of agendamentos"
+        [agendamentoItem]="agendamento"
+        (selectedItemAgenda)="OnSelectedItemAgenda($event)">
+    </app-item-lista-agendamentos>     
 </div>

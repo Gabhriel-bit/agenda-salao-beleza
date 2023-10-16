@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="scrollbar">
+        <p></p>
+        <div class="col-xs-12">
+            <label>Insira a Data do agendamento</label>
+            <div>
+                <input type="date"
+                       [(ngModel)]="newAgendamento.data" #data
+                       (input)="validateData()">
+            </div>
+        </div>
+        <p></p>
+        <div class="col-xs-12">
+            <label>Insira o horário do agendamento</label>
+            <div>
+                <input type="time"
+                       [(ngModel)]="newAgendamento.hora" #hora
+                       (input)="validateHora()">
+            </div>
+        </div>
+        <p></p>
+        <div class="col-xs-12">
+            <label>Insira o nome do cliente</label>
+            <div>
+                <input type="text"
+                       [(ngModel)]="newAgendamento.cliente" #cliente
+                       (input)="validateCliente()">
+            </div>
+        </div>
+        <p></p>
+        <div class="col-xs-12">
+            <label>Insira o nome do funcionário, se houver</label>
+            <div>
+                <input type="text"
+                       [(ngModel)]="newAgendamento.funcionario" #funcionario
+                       (input)="validateFuncionario()">
+            </div>
+        </div>
+        <p></p>
+        <div class="col-xs-12">
+            <label class="btnHasPref">Possui preferência de atendimento?</label>
+            <input type="checkbox"
+                   [(ngModel)]="newAgendamento.hasPref">
+        </div>
+        <p></p>
+        <div class="col-xs-12">
+            <label>Insira os serviços separados por ;</label>
+            <div>
+                <input type="text"
+                       [(ngModel)]="newAgendamento.servicos" #servicos
+                       (input)="validateServicos()">
+            </div>
+        </div>
+    </div>   
+</div>
+<p></p>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="col-md-2">
+            <button class="btn btn-success"
+                    [disabled]="!canSubmit"
+                    (click)="onClickSalvar()">Salvar</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-danger" (click)="onClickCancelar()">Cancelar</button>
+        </div>
+    </div>
+</div>

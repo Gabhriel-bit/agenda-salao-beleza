@@ -14,16 +14,7 @@ export class ListaAgendamentosComponent {
   @Output('selectedItemAgenda') selectedItemLista = new EventEmitter<Agendamento>();
   @Input('listaAgendamentos') agendamentos: Agendamento[];
 
-  onClickItemLista(selectedItem: Agendamento){
-    this.selectedItemLista.emit(
-      new Agendamento(
-        selectedItem.getCodigo(),
-        selectedItem.getDataHora(),
-        selectedItem.getNomeCliente(),
-        selectedItem.getNomeFuncionario(),
-        selectedItem.getHasPreferenciaAtt(),
-        selectedItem.getServicos()
-      )
-    );
+  OnSelectedItemAgenda(agedamentoData: Agendamento){
+    this.selectedItemLista.emit(agedamentoData);
   }
 }
