@@ -1,17 +1,20 @@
 <div class="row">
     <div class="col-xs-12">
-        <h4>Detalhes do Agendamento</h4>
+        <h3>Detalhes do Agendamento</h3>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-6">
         <div class="col-md-3">
             <button class="btn btn-warning"
+                    routerLink="/update-agendamento"
+                    (click)="OnSelectItem()"
                     [disabled]="isInvalidAgendamento()">Editar</button>
         </div>
         <div class="col-md-3">
             <button class="btn btn-danger"
-                    [disabled]="isInvalidAgendamento()">Deletar</button>
+                    [disabled]="isInvalidAgendamento()"
+                    (click)="OnClickDelete()">Deletar</button>
         </div>
     </div>
 </div>
@@ -71,16 +74,20 @@
             <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getNomeCliente() }}</p>  
         </div>
 
-        <div class="list-group-item clearfix">
-            <p class="list-group-item-text"
-               *ngIf="isInvalidAgendamento()">-</p>
-
+        <div class="list-group-item clearfix"
+             *ngIf="isInvalidAgendamento()">
+            <p class="list-group-item-text">-</p>
+        </div>
+        
+        <div class="list-group-item clearfix"
+             *ngIf="!isInvalidAgendamento()">    
             <p class="list-group-item-text"
                *ngIf="agendamento.getServicos().length === 1">
                {{ agendamento.getServicos()[0] }}
             </p>  
 
-            <div *ngIf="agendamento.getServicos().length > 1">
+            <div [class]="agendamento.getServicos().length > 4 ? 'scrollbar' : ''"
+                 *ngIf="agendamento.getServicos().length > 1">
                 <div class="list-group-item clearfix"
                     *ngFor="let servico of agendamento.getServicos()">
                     <p class="list-group-item-text">{{ servico }}</p>

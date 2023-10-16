@@ -12,10 +12,10 @@ Agenda para controlar os agendamentos de um salão de beleza
 - [X] Usar pelo menos dois tipos de data-binding (Interpolation, Property Binding, Event Binding e Two Way Data Binding).
 - [X] Passar dados via hierarquia de componentes, ou seja, usando @Input ou @Output.
 - [X] Mapear componentes à rotas no módulo de rotas.
-- [ ] Criar navegação entre páginas por meio de rotas.
+- [X] Criar navegação entre páginas por meio de rotas.
 - [X] Passar dados entre componentes que representam diferentes telas via parâmetros de rotas. 
 - [ ] Validar campos do formulário com REGEX e apresentar os erros.
-- [ ] Desabilitar o botão de submit enquanto o formulário está inválido.
+- [X] Desabilitar o botão de submit enquanto o formulário está inválido.
 - [ ] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
 - [ ] Cadastrar uma entidade usando uma API (JSON Server).
 - [X] Apresentar uma lista de dados com a diretiva estrutural ngFor.

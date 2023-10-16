@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Agendamento } from './agendamentos/agendamento.model';
+
+import { AgendamentosService } from './agendamentos/agendamentos-service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [AgendamentosService]
 })
 export class AppComponent {
 
