@@ -169,7 +169,7 @@ export class SettingAgendamentosComponent implements OnInit{
     if (!this.validateFuncionario()) { return; }
     if (!this.validateServicos())    { return; }
 
-    this.agendamentoService.insertItemAgenda( new Agendamento(
+    const newAgendamento = new Agendamento(
       (this.agendamento === null) ? this.agendamentoService.getNextCodigo() 
                                   : this.agendamento.getCodigo(),
       this.getStrToDate(),
@@ -177,7 +177,14 @@ export class SettingAgendamentosComponent implements OnInit{
       this.newAgendamento.funcionario,
       this.newAgendamento.hasPref,
       this.newAgendamento.servicos.split(';')
-    ))
+    );
+
+    if (this.agendamento === null) { 
+      this.agendamentoService.insertItemAgenda(newAgendamento);
+    } else {
+      this.agendamentoService.updateItemAgenda(newAgendamento);
+    }
+    
     this.router.navigate(['']);
   }
 
