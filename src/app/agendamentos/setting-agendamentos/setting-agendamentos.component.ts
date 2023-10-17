@@ -52,13 +52,13 @@ export class SettingAgendamentosComponent implements OnInit{
       this.agendamento = null;
     } else {
       this.newAgendamento = {
-        codigo: this.agendamento.getCodigo(),
-        data: this.agendamento.getDataHora(),
+        codigo: this.agendamento.getCodigo,
+        data: this.agendamento.getDataHora,
         hora: this.agendamento.getFormatedDate('HH:mm'),
-        cliente: this.agendamento.getNomeCliente(),
-        funcionario: this.agendamento.getNomeFuncionario(),
-        hasPref: this.agendamento.getHasPreferenciaAtt(),
-        servicos: this.agendamento.getServicos().join(';')
+        cliente: this.agendamento.getNomeCliente,
+        funcionario: this.agendamento.getNomeFuncionario,
+        hasPref: this.agendamento.getHasPreferenciaAtt,
+        servicos: this.agendamento.getServicos.join(';')
       };
       this.camposValidos = '';
     }
@@ -171,7 +171,7 @@ export class SettingAgendamentosComponent implements OnInit{
 
     const newAgendamento = new Agendamento(
       (this.agendamento === null) ? this.agendamentoService.getNextCodigo() 
-                                  : this.agendamento.getCodigo(),
+                                  : this.agendamento.getCodigo,
       this.getStrToDate(),
       this.newAgendamento.cliente,
       this.newAgendamento.funcionario,
@@ -184,7 +184,7 @@ export class SettingAgendamentosComponent implements OnInit{
     } else {
       this.agendamentoService.updateItemAgenda(newAgendamento);
     }
-    
+
     this.router.navigate(['']);
   }
 

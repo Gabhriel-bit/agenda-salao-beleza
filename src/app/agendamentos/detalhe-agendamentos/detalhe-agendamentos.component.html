@@ -51,7 +51,7 @@
     </div>
     <div class="col-md-6">
         <div class="list-group-item clearfix">
-            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getCodigo() }}</p>  
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getCodigo }}</p>  
         </div>
 
         <div class="list-group-item clearfix">
@@ -63,15 +63,15 @@
         </div>
 
         <div class="list-group-item clearfix">
-            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getStrHasPreferenciaAtt() }}</p>  
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getStrHasPreferenciaAtt }}</p>  
         </div>
         
         <div class="list-group-item clearfix">
-            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getNomeFuncionario() }}</p>  
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getNomeFuncionario }}</p>  
         </div>
 
         <div class="list-group-item clearfix">
-            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getNomeCliente() }}</p>  
+            <p class="list-group-item-text">{{ isInvalidAgendamento() ? '-' : agendamento.getNomeCliente }}</p>  
         </div>
 
         <div class="list-group-item clearfix"
@@ -82,14 +82,14 @@
         <div class="list-group-item clearfix"
              *ngIf="!isInvalidAgendamento()">    
             <p class="list-group-item-text"
-               *ngIf="agendamento.getServicos().length === 1">
-               {{ agendamento.getServicos()[0] }}
+               *ngIf="agendamento.getServicos.length === 1">
+               {{ agendamento.getServicos[0] }}
             </p>  
 
-            <div [class]="agendamento.getServicos().length > 4 ? 'scrollbar' : ''"
-                 *ngIf="agendamento.getServicos().length > 1">
+            <div [class]="agendamento.getServicos.length > 4 ? 'scrollbar' : ''"
+                 *ngIf="agendamento.getServicos.length > 1">
                 <div class="list-group-item clearfix"
-                    *ngFor="let servico of agendamento.getServicos()">
+                    *ngFor="let servico of agendamento.getServicos">
                     <p class="list-group-item-text">{{ servico }}</p>
                 </div>
             </div>

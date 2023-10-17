@@ -8,26 +8,13 @@ export class AgendamentosService {
         new Agendamento(1, new Date(1682374200000), 'Gabhriel', 'Juliana', true, ['Corte de cabelo', 'Barba']),
         new Agendamento(2, new Date(1697585400000), 'Carlos', 'Carmem', false, ['Platinar']),
         new Agendamento(3, new Date(1688275200000), 'Rodrigo', 'Juliana', false, ['Barba']),
-
-        /*
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(), 'Carlos', 'Carmem', false, ['Platinar'])
-        */
     ];
 
     setSelectedAgendamento(agendamentoData: Agendamento){
         let index = -1;
 
         if ((agendamentoData !== null) && (agendamentoData !== undefined)){
-            index = this.agendamentos.findIndex(agenda => agenda.getCodigo() === agendamentoData.getCodigo());
+            index = this.agendamentos.findIndex(agenda => agenda.getCodigo === agendamentoData.getCodigo);
         }
 
         this.selectedAgendamento =
@@ -35,7 +22,8 @@ export class AgendamentosService {
     }
 
     getSelectedAgendamento(){
-        return this.selectedAgendamento === null ? null : this.selectedAgendamento.clone();
+        return (this.selectedAgendamento === null ||
+                this.selectedAgendamento === undefined) ? null : this.selectedAgendamento.clone();
     }
 
     getAgendamentos(){
@@ -45,7 +33,7 @@ export class AgendamentosService {
 
     deleteItemAgenda(agendamentoData: Agendamento){
         if (agendamentoData !== null) {
-            this.agendamentos = this.agendamentos.filter(item => item.getCodigo() !== agendamentoData.getCodigo());
+            this.agendamentos = this.agendamentos.filter(item => item.getCodigo !== agendamentoData.getCodigo);
             this.selectedAgendamento = null;
             this.orderListByData();
         }
@@ -54,15 +42,15 @@ export class AgendamentosService {
     updateItemAgenda(agendamentoData: Agendamento){
         if (agendamentoData !== null) {
             const index = this.agendamentos.findIndex(
-                agenda => agenda.getCodigo() === agendamentoData.getCodigo()
+                agenda => agenda.getCodigo === agendamentoData.getCodigo
             );
 
             this.agendamentos[index].updateValues(
-                agendamentoData.getDataHora(),
-                agendamentoData.getNomeCliente(),
-                agendamentoData.getNomeFuncionario(),
-                agendamentoData.getHasPreferenciaAtt(),
-                agendamentoData.getServicos()
+                agendamentoData.getDataHora,
+                agendamentoData.getNomeCliente,
+                agendamentoData.getNomeFuncionario,
+                agendamentoData.getHasPreferenciaAtt,
+                agendamentoData.getServicos
             );
             this.orderListByData();
         }
@@ -80,7 +68,7 @@ export class AgendamentosService {
     orderListByData(){
         if (this.agendamentos.length >= 2){
             this.agendamentos.sort(
-                (itemAtual, proxItem) => itemAtual.getDataHora().getTime() - proxItem.getDataHora().getTime()
+                (itemAtual, proxItem) => itemAtual.getDataHora.getTime() - proxItem.getDataHora.getTime()
             )
         }
     }
@@ -93,8 +81,8 @@ export class AgendamentosService {
         let maiorCodigo = 0;
 
         this.agendamentos.forEach((agendamento) => {
-            if (agendamento.getCodigo() > maiorCodigo) {
-                maiorCodigo = agendamento.getCodigo();
+            if (agendamento.getCodigo > maiorCodigo) {
+                maiorCodigo = agendamento.getCodigo;
             }
         });
 

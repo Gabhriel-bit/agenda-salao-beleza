@@ -22,13 +22,13 @@ export class DetalheAgendamentosComponent implements OnInit{
   }
 
   OnClickDelete(){
-    console.log(this.agendamento.getCodigo());
+    console.log(this.agendamento.getCodigo);
     this.deleteItemAgenda.emit(this.agendamento);
   }
 
   OnSelectItem(){
     this.agendamentoServer.setSelectedAgendamento(this.agendamento);
-    console.log('detalhe ' + this.agendamento.getNomeCliente());
+    console.log('detalhe ' + this.agendamento.getNomeCliente);
   }
 
   ngOnInit(): void {
