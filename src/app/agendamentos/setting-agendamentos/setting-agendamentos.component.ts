@@ -16,9 +16,8 @@ export class SettingAgendamentosComponent implements OnInit{
 
   private agendamentoService: AgendamentosService;
   private router: Router;
-  private agendamento: Agendamento;
 
-  newAgendamento: {codigo: number, data: Date, hora: string,
+  newAgendamento: {codigo: number, data: string, hora: string,
                    cliente: string, funcionario: string, hasPref: Boolean,
                    servicos: string};
 
@@ -35,33 +34,24 @@ export class SettingAgendamentosComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.newAgendamento = {
-      codigo: 0,
-      data: null,
-      hora: '',
-      cliente: '',
-      funcionario: '',
-      hasPref: false,
-      servicos: ''
-    };
+    this.camposValidos = '';
+    let agendamento = this.agendamentoService.getSelectedAgendamento();
 
-    this.camposValidos = '12345';
-    this.agendamento = this.agendamentoService.getSelectedAgendamento();
-
-    if ((this.agendamento === undefined) || (this.agendamento === null)){
-      this.agendamento = null;
-    } else {
-      this.newAgendamento = {
-        codigo: this.agendamento.getCodigo,
-        data: this.agendamento.getDataHora,
-        hora: this.agendamento.getFormatedDate('HH:mm'),
-        cliente: this.agendamento.getNomeCliente,
-        funcionario: this.agendamento.getNomeFuncionario,
-        hasPref: this.agendamento.getHasPreferenciaAtt,
-        servicos: this.agendamento.getServicos.join(';')
-      };
-      this.camposValidos = '';
+    if ((agendamento === undefined) || (agendamento === null)){
+      agendamento = Agendamento.emptyConstructor();
+      this.camposValidos = '12345';
     }
+
+    this.newAgendamento = {
+      codigo: agendamento.getCodigo,
+      data: agendamento.getFormatedDate('YYYY-MM-DD'),
+      hora: agendamento.getFormatedDate('HH:mm'),
+      cliente: agendamento.getNomeCliente,
+      funcionario: agendamento.getNomeFuncionario,
+      hasPref: agendamento.getHasPreferenciaAtt,
+      servicos: agendamento.getServicos.join(';')
+    };
+    
     this.validateSubmit();
   }
 
@@ -148,8 +138,7 @@ export class SettingAgendamentosComponent implements OnInit{
 
   getStrToDate() {
     const [horas, minutos] = this.newAgendamento.hora.split(':');
-    const strDate: string = this.dataEl.nativeElement.value;
-    const [ano, mes, dia] = strDate.split('-');
+    const [ano, mes, dia] = this.newAgendamento.data.split('-');;
 
     const data = new Date(
       parseInt(ano, 10),
@@ -170,8 +159,8 @@ export class SettingAgendamentosComponent implements OnInit{
     if (!this.validateServicos())    { return; }
 
     const newAgendamento = new Agendamento(
-      (this.agendamento === null) ? this.agendamentoService.getNextCodigo() 
-                                  : this.agendamento.getCodigo,
+      (this.newAgendamento.codigo === 0) ? this.agendamentoService.getNextCodigo() 
+                                         : this.newAgendamento.codigo,
       this.getStrToDate(),
       this.newAgendamento.cliente,
       this.newAgendamento.funcionario,
@@ -179,7 +168,7 @@ export class SettingAgendamentosComponent implements OnInit{
       this.newAgendamento.servicos.split(';')
     );
 
-    if (this.agendamento === null) { 
+    if (this.newAgendamento.codigo === 0) { 
       this.agendamentoService.insertItemAgenda(newAgendamento);
     } else {
       this.agendamentoService.updateItemAgenda(newAgendamento);

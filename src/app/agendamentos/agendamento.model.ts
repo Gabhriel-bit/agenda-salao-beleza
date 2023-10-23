@@ -8,7 +8,13 @@ export class Agendamento {
     private NomeFuncionario: string;
     private HasPreferenciaAtt: Boolean;
     private Servicos: string[];
-    
+
+    static emptyConstructor(): Agendamento{
+        const newInstance =
+           new Agendamento( 0, new Date(), '', '', false, [] );
+        return newInstance
+    }
+
     constructor(codigo: number,
                 dataHora: Date,
                 nomeCliente: string,

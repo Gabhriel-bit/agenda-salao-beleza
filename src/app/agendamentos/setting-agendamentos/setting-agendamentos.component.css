@@ -1,5 +1,5 @@
 .scrollbar{
     height: 662px; 
     overflow-y: auto; 
-    border: 2cqh solid #ccc; 
+    border: 0.5cqh solid #ccc; 
 }
