@@ -1,0 +1,7 @@
+<div class="scrollbar">
+    <app-item-lista-servicos-agenda
+        *ngFor="let servico of servicos"
+        [servicoItem]="servico"
+        (selectedItemServico)="OnSelectedItemServico($event)">
+    </app-item-lista-servicos-agenda>     
+</div>

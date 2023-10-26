@@ -1,57 +1,66 @@
-<div class="scrollbar">
-    <p></p>
-    <div class="col-xs-12">
-        <label>Insira a Data do agendamento</label>
-        <div>
-            <input type="date"
-                    [(ngModel)]="newAgendamento.data" #data
-                    (input)="validateData()">
+<div class="row">
+    <!-- Right colunm -->
+    <div class="col-md-4">
+        <div class="col-xs-12">
+            <label>Insira a Data do agendamento</label>
+            <div>
+                <input type="date"
+                        [(ngModel)]="newAgendamento.data" #data
+                        (input)="validateData()">
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <label>Insira o horário do agendamento</label>
+            <div>
+                <input type="time"
+                        [(ngModel)]="newAgendamento.hora" #hora
+                        (input)="validateHora()">
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <label>Insira o nome do cliente</label>
+            <div>
+                <input type="text"
+                        [(ngModel)]="newAgendamento.cliente" #cliente
+                        (input)="validateCliente()">
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <label>Insira o nome do funcionário, se houver</label>
+            <div>
+                <input type="text"
+                        [(ngModel)]="newAgendamento.funcionario" #funcionario
+                        (input)="validateFuncionario()">
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <label class="btnHasPref">Possui preferência de atendimento?</label>
+            <input type="checkbox"
+                    [(ngModel)]="newAgendamento.hasPref">
         </div>
     </div>
-    <p></p>
-    <div class="col-xs-12">
-        <label>Insira o horário do agendamento</label>
-        <div>
-            <input type="time"
-                    [(ngModel)]="newAgendamento.hora" #hora
-                    (input)="validateHora()">
-        </div>
+    <!-- Middle colunm -->
+    <div class="col-md-4">
+        <!-- Serviços Disponiveis -->
+        <label>Serviços Disponiveis ({{ listaServicosDisponiveis.length }})</label>
+        <app-lista-servicos-agenda [listaServicos]="listaServicosDisponiveis"
+                                   (selectedItemServico)="OnSelectedItemServicoDisponivel($event)">
+        </app-lista-servicos-agenda>
     </div>
-    <p></p>
-    <div class="col-xs-12">
-        <label>Insira o nome do cliente</label>
-        <div>
-            <input type="text"
-                    [(ngModel)]="newAgendamento.cliente" #cliente
-                    (input)="validateCliente()">
-        </div>
+    <!-- Left colunm -->
+    <div class="col-md-4">
+        <!-- Serviços Cadastrados -->
+        <label>Serviços Adicionados ({{ listaServicosAdicionados.length }})</label>
+        <app-lista-servicos-agenda [listaServicos]="listaServicosAdicionados"
+                                   (selectedItemServico)="OnSelectedItemServicoAdicionado($event)">
+        </app-lista-servicos-agenda>
     </div>
-    <p></p>
-    <div class="col-xs-12">
-        <label>Insira o nome do funcionário, se houver</label>
-        <div>
-            <input type="text"
-                    [(ngModel)]="newAgendamento.funcionario" #funcionario
-                    (input)="validateFuncionario()">
-        </div>
-    </div>
-    <p></p>
-    <div class="col-xs-12">
-        <label class="btnHasPref">Possui preferência de atendimento?</label>
-        <input type="checkbox"
-                [(ngModel)]="newAgendamento.hasPref">
-    </div>
-    <p></p>
-    <div class="col-xs-12">
-        <label>Insira os serviços separados por ;</label>
-        <div>
-            <input type="text"
-                    [(ngModel)]="newAgendamento.servicos" #servicos
-                    (input)="validateServicos()">
-        </div>
-    </div>
-</div>   
-<p></p>
+</div>
+<hr>
 <div class="row">
     <div class="col-xs-6">
         <div class="col-md-2">

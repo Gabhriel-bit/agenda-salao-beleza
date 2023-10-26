@@ -1,13 +1,15 @@
 import { UpperCasePipe } from '@angular/common';
 import * as moment from 'moment';
 
+import { Servico } from '../servicos/servico.model'
+
 export class Agendamento {
     private Codigo: number;
     private DataHora: Date;
     private NomeCliente: string;
     private NomeFuncionario: string;
     private HasPreferenciaAtt: Boolean;
-    private Servicos: string[];
+    private Servicos: Servico[];
 
     static emptyConstructor(): Agendamento{
         const newInstance =
@@ -20,7 +22,7 @@ export class Agendamento {
                 nomeCliente: string,
                 nomeFuncionario: string,
                 hasPreferenciaAtt: Boolean,
-                servicos: string[]){
+                servicos: Servico[]){
         this.Codigo = codigo;
         this.DataHora = dataHora;
         this.NomeCliente = nomeCliente;
@@ -37,7 +39,7 @@ export class Agendamento {
     get getHasPreferenciaAtt(){ return this.HasPreferenciaAtt; }
     get getStrHasPreferenciaAtt(){ return this.HasPreferenciaAtt ? 'Sim' : 'Não'; }
 
-    set setServicos(servicos: string[]){ this.Servicos = servicos.slice(); }
+    set setServicos(servicos: Servico[]){ this.Servicos = servicos.slice(); }
     set setDataHora(data: Date){ this.DataHora = data; }
     set setCodigo(codigo: number){ this.Codigo = codigo; }
     set setNomeCliente(nomeCliente: string){ this.NomeCliente = nomeCliente; }
@@ -53,7 +55,7 @@ export class Agendamento {
                  nomeCliente: string,
                  nomeFuncionario: string,
                  hasPreferenciaAtt: Boolean,
-                 servicos: string[]){
+                 servicos: Servico[]){
         this.DataHora = dataHora;
         this.NomeCliente = nomeCliente;
         this.Servicos = servicos;

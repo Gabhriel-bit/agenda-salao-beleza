@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { AgendamentosService } from '../agendamentos-service';
+import { AgendamentosService } from '../agendamentos.service';
+import { ServicosService } from '../../servicos/servico.service';
+import { Servico } from '../../servicos/servico.model';
+
 import { Agendamento } from '../agendamento.model';
 import { Router } from '@angular/router';
 
@@ -11,25 +14,29 @@ import { Router } from '@angular/router';
 })
 export class SettingAgendamentosComponent implements OnInit{
   
+  listaServicosAdicionados : Servico[] = [];
+  listaServicosDisponiveis : Servico[] = [];
+
   canSubmit: Boolean = false;
   camposValidos: string = '';
 
   private agendamentoService: AgendamentosService;
+  private servicoService: ServicosService;
   private router: Router;
 
   newAgendamento: {codigo: number, data: string, hora: string,
-                   cliente: string, funcionario: string, hasPref: Boolean,
-                   servicos: string};
+                   cliente: string, funcionario: string, hasPref: Boolean};
 
   @ViewChild('data') dataEl: ElementRef;
   @ViewChild('hora') horaEl: ElementRef;
   @ViewChild('cliente') clienteEl: ElementRef;
   @ViewChild('funcionario') funcionarioEl: ElementRef;
-  @ViewChild('servicos') serviceEl: ElementRef;
 
   constructor(agendamentoService: AgendamentosService,
+              servicoService: ServicosService,
               router: Router){
     this.agendamentoService = agendamentoService;
+    this.servicoService = servicoService;
     this.router = router;
   }
 
@@ -39,7 +46,7 @@ export class SettingAgendamentosComponent implements OnInit{
 
     if ((agendamento === undefined) || (agendamento === null)){
       agendamento = Agendamento.emptyConstructor();
-      this.camposValidos = '12345';
+      this.camposValidos = '345';
     }
 
     this.newAgendamento = {
@@ -48,10 +55,15 @@ export class SettingAgendamentosComponent implements OnInit{
       hora: agendamento.getFormatedDate('HH:mm'),
       cliente: agendamento.getNomeCliente,
       funcionario: agendamento.getNomeFuncionario,
-      hasPref: agendamento.getHasPreferenciaAtt,
-      servicos: agendamento.getServicos.join(';')
+      hasPref: agendamento.getHasPreferenciaAtt
     };
-    
+
+    this.servicoService.getServicos()
+      .filter(item => !agendamento.getServicos.find(item1 => item1.getCodigo === item.getCodigo) )
+      .forEach(item => this.listaServicosDisponiveis.push(item.clone()));
+
+    this.listaServicosAdicionados = agendamento.getServicos.slice();
+
     this.validateSubmit();
   }
 
@@ -119,14 +131,11 @@ export class SettingAgendamentosComponent implements OnInit{
   }
 
   validateServicos(){
-    //this.camposValidos.match
-    if (this.newAgendamento.servicos === ''){
-      this.changeColorError(this.serviceEl, false);
+    if (this.listaServicosAdicionados.length === 0){
       this.camposValidos += '5';
       return false;
     }
     
-    this.changeColorError(this.serviceEl, true);
     this.camposValidos = this.camposValidos.replace('5', '');
     this.validateSubmit();
     return true;
@@ -165,7 +174,7 @@ export class SettingAgendamentosComponent implements OnInit{
       this.newAgendamento.cliente,
       this.newAgendamento.funcionario,
       this.newAgendamento.hasPref,
-      this.newAgendamento.servicos.split(';')
+      this.listaServicosAdicionados.slice()
     );
 
     if (this.newAgendamento.codigo === 0) { 
@@ -181,4 +190,26 @@ export class SettingAgendamentosComponent implements OnInit{
     this.router.navigate(['']);
   }
 
+  OnSelectedItemServicoAdicionado(servicosAdicionadosAtual: Servico[]) {
+    this.ajustarLista(servicosAdicionadosAtual, 
+                      this.listaServicosDisponiveis);
+
+    this.listaServicosAdicionados = servicosAdicionadosAtual.slice();
+    this.validateServicos();
+  }
+
+  OnSelectedItemServicoDisponivel(servicosDisponiveisAtual: Servico[]){
+    this.ajustarLista(servicosDisponiveisAtual, 
+                      this.listaServicosAdicionados);
+
+    this.listaServicosDisponiveis = servicosDisponiveisAtual.slice();
+    this.validateServicos();
+  }
+
+  ajustarLista(ListaAtual: Servico[], ListaToAdd: Servico[]){
+    this.servicoService.getServicos()
+      .filter(item => !ListaAtual.find(item1 => item1.getCodigo === item.getCodigo) &&
+                      !ListaToAdd.find(item2 => item2.getCodigo === item.getCodigo) )
+      .forEach(item => ListaToAdd.push(item) );
+  }
 }

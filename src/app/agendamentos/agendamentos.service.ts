@@ -1,13 +1,26 @@
 import { Agendamento } from "./agendamento.model";
+import { Servico } from '../servicos/servico.model';
 
 export class AgendamentosService {
 
     private selectedAgendamento: Agendamento = null;
 
     private agendamentos: Agendamento[] = [
-        new Agendamento(1, new Date(1682374200000), 'Gabhriel', 'Juliana', true, ['Corte de cabelo', 'Barba']),
-        new Agendamento(2, new Date(1697585400000), 'Carlos', 'Carmem', false, ['Platinar']),
-        new Agendamento(3, new Date(1688275200000), 'Rodrigo', 'Juliana', false, ['Barba']),
+        new Agendamento(1, new Date(1682374200000), 'Gabhriel', 'Juliana', true,
+            [ new Servico(1, 'Corte de Cabelo'),
+              new Servico(2, 'Coloração de Cabelo'),
+              new Servico(3, 'Manicure'),
+              new Servico(4, 'Pedicure'),
+              new Servico(5, 'Maquiagem'),
+              new Servico(6, 'Depilação')]),
+        new Agendamento(2, new Date(1697585400000), 'Carlos', 'Carmem', false,
+            [ new Servico(3, 'Manicure'),
+              new Servico(4, 'Pedicure'),
+              new Servico(5, 'Maquiagem')]),
+        new Agendamento(3, new Date(1688275200000), 'Rodrigo', 'Juliana', false,
+            [ new Servico(7, 'Escova'),
+              new Servico(8, 'Hidratação Capilar'),
+              new Servico(9, 'Penteado')]),
     ];
 
     setSelectedAgendamento(agendamentoData: Agendamento){

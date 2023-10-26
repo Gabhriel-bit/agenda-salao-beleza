@@ -83,14 +83,14 @@
              *ngIf="!isInvalidAgendamento()">    
             <p class="list-group-item-text"
                *ngIf="agendamento.getServicos.length === 1">
-               {{ agendamento.getServicos[0] }}
+               {{ agendamento.getServicos[0].getNome }}
             </p>  
 
-            <div [class]="agendamento.getServicos.length > 4 ? 'scrollbar' : ''"
+            <div [class]="agendamento.getServicos.length > 6 ? 'scrollbar' : ''"
                  *ngIf="agendamento.getServicos.length > 1">
                 <div class="list-group-item clearfix"
                     *ngFor="let servico of agendamento.getServicos">
-                    <p class="list-group-item-text">{{ servico }}</p>
+                    <p class="list-group-item-text">{{ servico.getNome }}</p>
                 </div>
             </div>
         </div>

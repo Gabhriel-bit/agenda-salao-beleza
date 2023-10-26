@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { Agendamento } from '../agendamento.model';
-import { AgendamentosService } from '../agendamentos-service';
+import { AgendamentosService } from '../agendamentos.service';
 
 @Component({
   selector: 'app-detalhe-agendamentos',
@@ -22,13 +22,11 @@ export class DetalheAgendamentosComponent implements OnInit{
   }
 
   OnClickDelete(){
-    console.log(this.agendamento.getCodigo);
     this.deleteItemAgenda.emit(this.agendamento);
   }
 
   OnSelectItem(){
     this.agendamentoServer.setSelectedAgendamento(this.agendamento);
-    console.log('detalhe ' + this.agendamento.getNomeCliente);
   }
 
   ngOnInit(): void {

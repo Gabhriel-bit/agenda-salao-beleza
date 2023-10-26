@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Agendamento } from './agendamento.model';
-import { AgendamentosService } from './agendamentos-service';
+import { AgendamentosService } from './agendamentos.service';
 
 @Component({
   selector: 'app-agedamentos',
